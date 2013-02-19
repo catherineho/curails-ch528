@@ -24,7 +24,7 @@ describe MicroPostsController do
   # MicroPost. As you add validations to MicroPost, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "user_id" => "1", "content" => "abcde" }
+    { "user_id" => "1", "content" => "hello world" }
   end
 
   # This should return the minimal set of values that should be in the session
