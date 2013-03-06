@@ -1,5 +1,7 @@
 <h1>Listing users</h1>
 
+<%= will_paginate @users %>
+
 <table>
   <tr>
     <th>Name</th>
@@ -19,6 +21,8 @@
   </tr>
 <% end %>
 </table>
+
+<%= will_paginate @users %>
 
 <br />
 

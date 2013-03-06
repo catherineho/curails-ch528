@@ -5,9 +5,20 @@
     This is a sample website used in INFO 2310 to learn Ruby on Rails.  Please
     sign up and share your thoughts with us in 5-140 character chunks.
   </p>
-  <% unless signed_in? %>
+  
+  <% if signed_in? %>
+  
+	<%= render 'micro_posts/form' %>
+  
+	<%= will_paginate @feed %>
+	
+	<div id="user_feed">
+		<%= render @feed %>
+	</div>
+  <% else %>
 	<p>
 		<%= link_to 'Sign Up', new_user_path, class: 'btn btn-primary btn-large' %>
 	</p>
 <% end %>
+
 </div>
