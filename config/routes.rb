@@ -1,15 +1,17 @@
 Info2310::Application.routes.draw do
 
   resources :micro_posts
+    
+  resources :sessions, only: [:new, :create, :destroy]
   resources :users
-
+  resources :sessions, only: [:new, :create, :destroy]
 
   get "static_pages/home"
   get "static_pages/help"
   get "static_pages/about"
   
   root to: 'static_pages#home'
-
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

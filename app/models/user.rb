@@ -35,11 +35,19 @@ class User < ActiveRecord::Base
   # You may wish to review the slides from lecture_3, which have references
   # to using the "find" functions provided by active record so that you
   # can locate the correct user in the database.
-  def self.authenticate(email, plain_text_password)
-	user = find_by_email(email)
-	return user if user && user.authenticated(plain_text_password)
+  # def self.authenticate(email, plain_text_password)
+	# user = find_by_email(email)
+	# return user if user && user.authenticate(plain_text_password)
+  # end
+  # def authenticate(password)
+	# self.hashed_password == encrypt(password)
+  # end
+  def has_password?(raw_password)
+	hashed_password == encrypt(raw_password)
   end
-  def authenticated(password)
-	self.hashed_password == encrypt(password)
+
+  def self.authenticate(email, plain_text_password)
+	user = User.find_by_email(email)
+	user && user.has_password?(plain_text_password) ? user : nil
   end
 end
