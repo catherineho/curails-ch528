@@ -95,4 +95,14 @@ class MicroPostsController < ApplicationController
 		end
         
 	end
+	
+	# GET /micro_posts/refresh?ids=[1,2,3,4,5] 
+	def refresh
+		feed = current_user.feed(page: 1)
+		@new_micro_posts = feed.reject { |p| params[:ids].include?(p.id.to_s) }
+		respond_to do |format|
+			format.js
+	end
+end
+	
 end

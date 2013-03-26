@@ -3,6 +3,7 @@ class StaticPagesController < ApplicationController
 	if signed_in?
 		@micro_post = MicroPost.new
 		@feed = current_user.feed(page: params[:page])
+		
 	end
   end
 

@@ -24,8 +24,6 @@ class UsersController < ApplicationController
             format.html # show.html.erb
             format.json { render json: @user }
         end
-		
-		
     end
     
     # GET /users/new

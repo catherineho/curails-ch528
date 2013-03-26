@@ -1,0 +1,3 @@
+var element = $("<%= j( render(@new_micro_posts) ) %>").hide();
+$('#user_feed').prepend(element);
+element.fadeIn();

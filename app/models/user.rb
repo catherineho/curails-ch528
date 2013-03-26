@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
                       uniqueness: { case_sensitive: false }
   
   has_many :micro_posts
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed
 
   before_save :encrypt_password
                 
@@ -53,5 +55,28 @@ class User < ActiveRecord::Base
   
   def feed(paginate_options={page: 1})
 	micro_posts.paginate(paginate_options)
+  end
+  
+  # Returns the Relationship object this user has with other_user
+  # or nil if no relationship exists
+  def following?(other_user)
+	relationships.find_by_followed_id(other_user.id)
+  end
+
+  # create a Relationship object where this user is following other_user
+  def follow!(other_user)
+	relationships.create!(followed_id: other_user.id)
+  end
+
+  # destroy the Relationship object where this user is following other_user
+  def unfollow!(other_user)
+	relationships.find_by_followed_id(other_user.id).destroy
+  end
+  
+  def feed(paginate_options={page: 1})
+    followed_user_ids = followed_users.map { |u| u.id }
+    MicroPost.where('user_id = ? or user_id in (?)', id, followed_user_ids)
+             .order('created_at DESC')
+             .paginate(paginate_options)
   end
 end
