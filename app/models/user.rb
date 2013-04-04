@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   attr_accessor :password
-  attr_accessible :email, :name, :password
+  attr_accessible :email, :name, :password, :avatar, :avatar_cache, :remove_avatar
   
+  mount_uploader :avatar, AvatarUploader
+    
   validates :password, presence: true, if: "hashed_password.blank?"
   
   validates :name, presence: true,

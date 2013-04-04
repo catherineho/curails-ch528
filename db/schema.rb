@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313174322) do
+ActiveRecord::Schema.define(:version => 20130404015657) do
 
   create_table "micro_posts", :force => true do |t|
     t.integer  "user_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20130313174322) do
     t.datetime "updated_at",      :null => false
     t.string   "hashed_password"
     t.string   "salt"
+    t.string   "avatar"
   end
 
 end

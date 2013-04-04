@@ -12,4 +12,7 @@
 					remote: true %>
    <% end %>
    
+  <%= image_tag(micro_post.user.avatar_url(:thumbnail)) if micro_post.user.avatar_url %>
+
+
 </p>
